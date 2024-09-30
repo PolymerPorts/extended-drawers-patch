@@ -1,0 +1,6 @@
+{
+  "parent": "extdraw-patch:sgui/button_32",
+  "textures": {
+    "layer0": "extdraw-patch:sgui/elements/done"
+  }
+}

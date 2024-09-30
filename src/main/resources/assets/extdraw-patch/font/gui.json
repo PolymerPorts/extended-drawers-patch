@@ -1,0 +1,22 @@
+{
+    "providers": [
+        {
+            "type": "space",
+            "advances": {
+                ".": -130,
+                "-": -60,
+                ",": -170,
+                "_": -8
+            }
+        },
+        {
+            "type": "bitmap",
+            "file": "extdraw-patch:sgui/limiter.png",
+            "ascent": 13,
+            "height": 256,
+            "chars": [
+                "0"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+	"schemaVersion": 1,
+	"id": "extended-drawers-polymer-patch",
+	"version": "${version}",
+	"name": "Polymer Patch for Extended Drawers",
+	"description": "Polymer Patch for Extended Drawers",
+	"authors": [
+		"Patbox"
+	],
+	"contact": {
+		"homepage": "https://pb4.eu",
+		"sources": "https://github.com/PolymerPorts/extended-drawers-patch"
+	},
+	"license": "LGPLv3",
+	"icon": "assets/extdraw-patch/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"eu.pb4.extdrawpatch.impl.ExtendedDrawersPolymerPatch"
+		]
+	},
+	"mixins": [
+		"extended-drawers-polymer-patch.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"extended_drawers": ">=3.0.0",
+		"minecraft": ">=1.21-",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

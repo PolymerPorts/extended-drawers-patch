@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "package": "eu.pb4.extdrawpatch.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "mod.ExtendedDrawersMixin",
+    "mod.block.AccessPointBlockMixin",
+    "mod.block.CompactingDrawerBlockMixin",
+    "mod.block.ConnectorBlockMixin",
+    "mod.block.DrawerBlockMixin",
+    "mod.block.ModBlocksMixin",
+    "mod.block.ShadowDrawerBlockMixin",
+    "mod.block.be.CompactingDrawerBlockEntityMixin",
+    "mod.block.be.DrawerBlockEntityMixin",
+    "mod.block.be.ShadowDrawerBlockEntityMixin",
+    "mod.item.CopyLimiterRecipeMixin",
+    "mod.item.DrawerItemMixin",
+    "mod.item.LimiterItemMixin",
+    "mod.item.ModItemsMixin",
+    "mod.item.UpgradeItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
