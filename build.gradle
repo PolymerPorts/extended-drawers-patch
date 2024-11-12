@@ -40,17 +40,17 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "maven.modrinth:extended-drawers:3.0.4+mc.1.21.1"
+	modImplementation "maven.modrinth:extended-drawers:4.0.0+mc.1.21.2"
 	modImplementation "com.kneelawk.graphlib:graphlib-core-fabric:2.0.0+1.21"
 	modImplementation "com.github.mattidragon:ConfigToolkit:1.1.1"
-	modImplementation "dev.isxander:yet-another-config-lib:3.5.0+1.21-fabric"
+	modImplementation "dev.isxander:yet-another-config-lib:3.6.1+1.21.2-fabric"
 
-	modImplementation include('eu.pb4:factorytools:0.3.2+1.21')
-	modImplementation include('eu.pb4:sgui:1.6.1+1.21.1')
-	modImplementation 'eu.pb4:polymer-core:0.9.16+1.21.1'
-	modImplementation 'eu.pb4:polymer-resource-pack:0.9.16+1.21.1'
-	modImplementation 'eu.pb4:polymer-autohost:0.9.16+1.21.1'
-	modImplementation 'eu.pb4:polymer-virtual-entity:0.9.16+1.21.1'
+	modImplementation include('eu.pb4:factorytools:0.4.1+1.21.3')
+	modImplementation include('eu.pb4:sgui:1.7.2+1.21.2')
+	modImplementation 'eu.pb4:polymer-core:0.10.2+1.21.3'
+	modImplementation 'eu.pb4:polymer-resource-pack:0.10.2+1.21.3'
+	modImplementation 'eu.pb4:polymer-autohost:0.10.2+1.21.3'
+	modImplementation 'eu.pb4:polymer-virtual-entity:0.10.2+1.21.3'
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

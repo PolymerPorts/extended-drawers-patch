@@ -1,15 +1,11 @@
 package eu.pb4.extdrawpatch.impl.ui;
 
-import eu.pb4.factorytools.api.resourcepack.BaseItemProvider;
-import eu.pb4.polymer.resourcepack.api.PolymerModelData;
-import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
-import eu.pb4.sgui.api.GuiHelpers;
+import eu.pb4.factorytools.api.virtualentity.ItemDisplayElementUtil;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.AnvilInputGui;
 import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -21,16 +17,14 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
 
-import java.util.Objects;
-
 public class CapacityLimiterGui extends AnvilInputGui {
     private final Hand hand;
     private final ItemStack stack;
     private static final Text TEXTURE = Text.literal("-0.").setStyle(Style.EMPTY.withColor(0xFFFFFF).withFont(Identifier.of("extdraw-patch:gui")));
-    private static final ItemStack EMPTY = BaseItemProvider.requestModel(Identifier.of("extdraw-patch:sgui/empty"));
-    private static final ItemStack CLOSE = BaseItemProvider.requestModel(Identifier.of("extdraw-patch:sgui/close"));
-    private static final ItemStack DONE = BaseItemProvider.requestModel(Identifier.of("extdraw-patch:sgui/done"));
-    private static final ItemStack DONE_BLOCKED = BaseItemProvider.requestModel(Identifier.of("extdraw-patch:sgui/done_blocked"));
+    private static final ItemStack EMPTY = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/empty"));
+    private static final ItemStack CLOSE = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/close"));
+    private static final ItemStack DONE = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/done"));
+    private static final ItemStack DONE_BLOCKED = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/done_blocked"));
 
     private long value = -1;
 

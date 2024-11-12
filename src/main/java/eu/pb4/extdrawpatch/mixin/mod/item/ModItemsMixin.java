@@ -1,8 +1,8 @@
 package eu.pb4.extdrawpatch.mixin.mod.item;
 
 import eu.pb4.factorytools.api.item.FactoryBlockItem;
-import eu.pb4.factorytools.api.item.ModeledItem;
 import eu.pb4.polymer.core.api.block.PolymerBlock;
+import eu.pb4.polymer.core.api.item.SimplePolymerItem;
 import io.github.mattidragon.extendeddrawers.registry.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -21,6 +21,6 @@ public class ModItemsMixin {
 
     @Redirect(method = "<clinit>", at = @At(value = "NEW", target = "(Lnet/minecraft/item/Item$Settings;)Lnet/minecraft/item/Item;"))
     private static Item replaceItemType(Item.Settings settings) {
-        return new ModeledItem(settings);
+        return new SimplePolymerItem(settings);
     }
 }

@@ -7,11 +7,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 public interface BaseFactoryBlock extends FactoryBlock {
 
     @Override
-    default BlockState getPolymerBlockState(BlockState state) {
+    default BlockState getPolymerBlockState(BlockState state, PacketContext context) {
         return Blocks.BARRIER.getDefaultState();
     }
 }

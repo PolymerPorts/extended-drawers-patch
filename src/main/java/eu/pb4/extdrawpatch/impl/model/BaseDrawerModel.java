@@ -12,14 +12,14 @@ import io.github.mattidragon.extendeddrawers.storage.DrawerStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.BlockFace;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.registry.Registries;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec2f;
 import org.joml.Matrix4f;
@@ -33,10 +33,10 @@ import java.util.Map;
 
 public class BaseDrawerModel extends BlockModel {
     private final ItemDisplayElement main;
-    private final DirectionProperty property;
+    private final EnumProperty<Direction> property;
     private final EnumProperty<BlockFace> blockFace;
 
-    public BaseDrawerModel(BlockState state, DirectionProperty directionProperty, EnumProperty<BlockFace> blockFaceProperty) {
+    public BaseDrawerModel(BlockState state, EnumProperty<Direction> directionProperty, EnumProperty<BlockFace> blockFaceProperty) {
         this.property = directionProperty;
         this.blockFace = blockFaceProperty;
         this.main = ItemDisplayElementUtil.createSimple(state.getBlock().asItem());

@@ -5,7 +5,6 @@ import io.github.mattidragon.extendeddrawers.block.ShadowDrawerBlock;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.math.Vec2f;
 
 import java.util.List;

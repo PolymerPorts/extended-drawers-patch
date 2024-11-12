@@ -11,12 +11,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import xyz.nucleoid.packettweaker.PacketContext;
 
 @Mixin(ShadowDrawerBlock.class)
 public class ShadowDrawerBlockMixin  implements BaseFactoryBlock {
 
     @Override
-    public BlockState getPolymerBreakEventBlockState(BlockState state, ServerPlayerEntity player) {
+    public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {
         return Blocks.END_STONE_BRICKS.getDefaultState();
     }
 

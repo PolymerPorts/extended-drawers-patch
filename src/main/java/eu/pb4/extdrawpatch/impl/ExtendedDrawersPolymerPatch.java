@@ -12,6 +12,7 @@ import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +23,7 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
     public void onInitialize() {
         PolymerResourcePackUtils.addModAssets("extended_drawers");
         PolymerResourcePackUtils.addModAssets(MOD_ID);
+        PolymerResourcePackUtils.addBridgedModelsFolder(Identifier.of("extdraw-patch", "sgui"));
 
         CapacityLimiterGui.register();
 
