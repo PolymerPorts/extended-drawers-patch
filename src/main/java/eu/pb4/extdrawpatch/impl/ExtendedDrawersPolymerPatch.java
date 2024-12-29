@@ -4,6 +4,7 @@ import eu.pb4.extdrawpatch.impl.ui.CapacityLimiterGui;
 import eu.pb4.polymer.core.api.block.PolymerBlockUtils;
 import eu.pb4.polymer.core.api.other.PolymerComponent;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
+import eu.pb4.polymer.resourcepack.extras.api.ResourcePackExtras;
 import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
 import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
 import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
@@ -23,7 +24,7 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
     public void onInitialize() {
         PolymerResourcePackUtils.addModAssets("extended_drawers");
         PolymerResourcePackUtils.addModAssets(MOD_ID);
-        PolymerResourcePackUtils.addBridgedModelsFolder(Identifier.of("extdraw-patch", "sgui"));
+        ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.of("extdraw-patch", "sgui"));
 
         CapacityLimiterGui.register();
 

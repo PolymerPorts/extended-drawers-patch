@@ -53,7 +53,7 @@ public class BaseDrawerModel extends BlockModel {
     }
 
     protected void updateState(BlockState state) {
-        var yaw = state.get(this.property).asRotation();
+        var yaw = state.get(this.property).getPositiveHorizontalDegrees();
         var pitch = switch (state.get(this.blockFace)) {
             case FLOOR -> -90;
             case CEILING -> 90;
