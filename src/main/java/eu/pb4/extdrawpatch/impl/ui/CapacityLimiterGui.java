@@ -3,8 +3,11 @@ package eu.pb4.extdrawpatch.impl.ui;
 import eu.pb4.factorytools.api.virtualentity.ItemDisplayElementUtil;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.AnvilInputGui;
+import io.github.mattidragon.extendeddrawers.component.LimiterLimitComponent;
 import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
+import it.unimi.dsi.fastutil.objects.ReferenceSortedSets;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,6 +20,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Unit;
 
+import java.util.SequencedSet;
+
 public class CapacityLimiterGui extends AnvilInputGui {
     private final Hand hand;
     private final ItemStack stack;
@@ -26,17 +31,17 @@ public class CapacityLimiterGui extends AnvilInputGui {
     private static final ItemStack DONE = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/done"));
     private static final ItemStack DONE_BLOCKED = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/done_blocked"));
 
-    private long value = -1;
+    private long value = Long.MAX_VALUE;
 
     public CapacityLimiterGui(ServerPlayerEntity player, ItemStack stack, Hand hand) {
         super(player, false);
         this.stack = stack;
         this.hand = hand;
-        this.value = stack.getOrDefault(ModDataComponents.LIMITER_LIMIT, -1L);
+        this.value = stack.getOrDefault(ModDataComponents.LIMITER_LIMIT, LimiterLimitComponent.NO_LIMIT).limit();
         this.setTitle(Text.empty().append(TEXTURE).append(stack.getName()));
-        var val = value >= 0 ? String.valueOf(this.value) : "";
+        var val = value != Long.MAX_VALUE ? String.valueOf(this.value) : "";
         this.setDefaultInputValue(val);
-        this.updateDoneButton(value >= 0);
+        this.updateDoneButton(value != Long.MAX_VALUE);
         this.updateDefault(val);
         var close = GuiElementBuilder.from(CLOSE);
         close.setName(ScreenTexts.BACK);
@@ -55,9 +60,9 @@ public class CapacityLimiterGui extends AnvilInputGui {
         ItemStack itemStack = EMPTY.copy();
         itemStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(current));
         itemStack.set(DataComponentTypes.ITEM_NAME, Text.literal(""));
-        itemStack.set(DataComponentTypes.HIDE_TOOLTIP, Unit.INSTANCE);
+        itemStack.set(DataComponentTypes.TOOLTIP_DISPLAY, new TooltipDisplayComponent(true, ReferenceSortedSets.emptySet()));
         this.setSlot(0, itemStack, (a, b, c, d) -> {
-            this.screenHandler.setPreviousTrackedSlot(2, ItemStack.EMPTY);
+            this.screenHandler.setReceivedStack(2, ItemStack.EMPTY);
         });
     }
 
@@ -73,7 +78,7 @@ public class CapacityLimiterGui extends AnvilInputGui {
         b.setName(ScreenTexts.DONE);
         b.setCallback(x -> {
             player.playSoundToPlayer(SoundEvents.UI_BUTTON_CLICK.value(), SoundCategory.MASTER, 0.5f, 1);
-            this.stack.set(ModDataComponents.LIMITER_LIMIT, this.value);
+            this.stack.set(ModDataComponents.LIMITER_LIMIT, new LimiterLimitComponent(this.value));
             this.close();
         });
         this.setSlot(1, b);
@@ -90,7 +95,7 @@ public class CapacityLimiterGui extends AnvilInputGui {
         } catch (Throwable ignored) {
             this.updateDoneButton(false);
         }
-        this.screenHandler.setPreviousTrackedSlot(2, ItemStack.EMPTY);
+        this.screenHandler.setReceivedStack(2, ItemStack.EMPTY);
     }
 
     @Override

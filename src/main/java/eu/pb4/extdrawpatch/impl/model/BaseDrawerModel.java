@@ -12,9 +12,9 @@ import io.github.mattidragon.extendeddrawers.storage.DrawerStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.BlockFace;
+import net.minecraft.item.ItemDisplayContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.ModelTransformationMode;
 import net.minecraft.registry.Registries;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.text.Text;
@@ -81,7 +81,7 @@ public class BaseDrawerModel extends BlockModel {
             var conf = ExtendedDrawers.CONFIG.get().client().layout();
 
             icon.mainItem.setViewRange(0.4f);
-            icon.mainItem.setModelTransformation(ModelTransformationMode.GUI);
+            icon.mainItem.setItemDisplayContext(ItemDisplayContext.GUI);
             icon.count.setViewRange(0.4f);
             icon.count.setBackground(0);
             icon.count.setInvisible(true);
@@ -118,7 +118,7 @@ public class BaseDrawerModel extends BlockModel {
             while (this.topIcons.size() < icons.size()) {
                 reposition = true;
                 var e = ItemDisplayElementUtil.createSimple();
-                e.setModelTransformation(ModelTransformationMode.GUI);
+                e.setItemDisplayContext(ItemDisplayContext.GUI);
                 e.setViewRange(0.4f);
                 e.setPitch(this.rot.x);
                 e.setYaw(this.rot.y);
