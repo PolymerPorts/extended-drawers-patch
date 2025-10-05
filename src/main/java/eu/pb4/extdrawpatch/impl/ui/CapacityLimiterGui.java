@@ -14,6 +14,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Style;
+import net.minecraft.text.StyleSpriteSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -25,7 +26,7 @@ import java.util.SequencedSet;
 public class CapacityLimiterGui extends AnvilInputGui {
     private final Hand hand;
     private final ItemStack stack;
-    private static final Text TEXTURE = Text.literal("-0.").setStyle(Style.EMPTY.withColor(0xFFFFFF).withFont(Identifier.of("extdraw-patch:gui")));
+    private static final Text TEXTURE = Text.literal("-0.").setStyle(Style.EMPTY.withColor(0xFFFFFF).withFont(new StyleSpriteSource.Font(Identifier.of("extdraw-patch:gui"))));
     private static final ItemStack EMPTY = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/empty"));
     private static final ItemStack CLOSE = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/close"));
     private static final ItemStack DONE = ItemDisplayElementUtil.getModel(Identifier.of("extdraw-patch:sgui/done"));
