@@ -40,18 +40,19 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation "maven.modrinth:extended-drawers:4.3.0-beta.1+mc.1.21.9"
+	modImplementation "maven.modrinth:extended-drawers:e6dMXpVF"
+	modImplementation "maven.modrinth:extended-drawers-extensions:4.3.0-beta.2+mc.1.21.10"
 	modImplementation include('com.kneelawk.graphlib:graphlib-core-fabric:2.0.3-beta.0.patbox.test+1.21.9')
 	modImplementation "com.github.mattidragon:ConfigToolkit:1.1.2"
 	modImplementation "dev.isxander:yet-another-config-lib:3.7.0+1.21.6-fabric"
 
-	modImplementation include('eu.pb4:factorytools:0.8.1+1.21.9')
+	modImplementation include('eu.pb4:factorytools:0.8.2+1.21.10')
 	modImplementation include('eu.pb4:sgui:1.11.0+1.21.9')
-	modImplementation 'eu.pb4:polymer-core:0.14.2+1.21.9'
-	modImplementation 'eu.pb4:polymer-resource-pack:0.14.2+1.21.9'
-	modImplementation 'eu.pb4:polymer-resource-pack-extras:0.14.2+1.21.9'
-	modImplementation 'eu.pb4:polymer-autohost:0.14.2+1.21.9'
-	modImplementation 'eu.pb4:polymer-virtual-entity:0.14.2+1.21.9'
+	modImplementation 'eu.pb4:polymer-core:0.14.3+1.21.10'
+	modImplementation 'eu.pb4:polymer-resource-pack:0.14.3+1.21.10'
+	modImplementation 'eu.pb4:polymer-resource-pack-extras:0.14.3+1.21.10'
+	modImplementation 'eu.pb4:polymer-autohost:0.14.3+1.21.10'
+	modImplementation 'eu.pb4:polymer-virtual-entity:0.14.3+1.21.10'
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
@@ -118,6 +119,7 @@ if (System.getenv("MODRINTH")) {
 		dependencies {
 			required.project "extended-drawers"
 			required.project "polymer"
+			optional.project "extended-drawers-extensions"
 		}
 	}
 

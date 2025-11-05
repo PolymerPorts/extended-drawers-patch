@@ -9,6 +9,7 @@ import eu.pb4.polymer.virtualentity.api.elements.TextDisplayElement;
 import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
 import io.github.mattidragon.extendeddrawers.config.category.ClientCategory;
 import io.github.mattidragon.extendeddrawers.storage.DrawerStorage;
+import io.github.mattidragon.extendeddrawers.storage.ModifierAccess;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.BlockFace;
@@ -139,7 +140,7 @@ public class BaseDrawerModel extends BlockModel {
                 mat.rotateY(MathHelper.PI);
                 mat.scale(conf.textScale(isSmall));
                 mat.translate(0, 0.40f, 0);
-                mat.scale(0.15f, 0.15f, 0.01f);
+                mat.scale(0.2f, 0.2f, 0.01f);
                 mat.translate(size / 2f - 0.5f, 0, 0);
 
                 for (var e : this.topIcons) {
@@ -187,8 +188,8 @@ public class BaseDrawerModel extends BlockModel {
                 addIcon(icons, config.dupingIcon());
             }
 
-            if (storage.getUpgrade() != null) {
-                addIcon(icons, storage.getUpgrade().sprite);
+            if (storage instanceof ModifierAccess access && access.getUpgrade() != null) {
+                addIcon(icons, access.getUpgrade().sprite);
             }
 
             if (storage.hasLimiter()) {

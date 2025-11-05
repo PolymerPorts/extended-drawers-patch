@@ -8,6 +8,7 @@
     "mod.block.CompactingDrawerBlockMixin",
     "mod.block.ConnectorBlockMixin",
     "mod.block.DrawerBlockMixin",
+    "mod.block.ExtensionBlocksMixin",
     "mod.block.ModBlocksMixin",
     "mod.block.ShadowDrawerBlockMixin",
     "mod.block.be.CompactingDrawerBlockEntityMixin",

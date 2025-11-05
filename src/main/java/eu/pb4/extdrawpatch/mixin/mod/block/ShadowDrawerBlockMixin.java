@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import xyz.nucleoid.packettweaker.PacketContext;
 
 @Mixin(ShadowDrawerBlock.class)
-public class ShadowDrawerBlockMixin  implements BaseFactoryBlock {
+public class ShadowDrawerBlockMixin implements BaseFactoryBlock {
 
     @Override
     public BlockState getPolymerBreakEventBlockState(BlockState state, PacketContext context) {

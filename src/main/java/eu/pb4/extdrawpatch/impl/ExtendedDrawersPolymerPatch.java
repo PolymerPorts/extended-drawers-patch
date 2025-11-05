@@ -1,5 +1,6 @@
 package eu.pb4.extdrawpatch.impl;
 
+import eu.pb4.extdrawpatch.impl.extensions.EDExtensionsPolymerPatch;
 import eu.pb4.extdrawpatch.impl.ui.CapacityLimiterGui;
 import eu.pb4.polymer.core.api.block.PolymerBlockUtils;
 import eu.pb4.polymer.core.api.other.PolymerComponent;
@@ -11,6 +12,7 @@ import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
 import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
 import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
@@ -33,5 +35,9 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
         RegistrySyncUtils.setServerEntry(Registries.RECIPE_SERIALIZER, ModRecipes.COPY_LIMITER_SERIALIZER);
 
         ExtendedDrawers.SHIFT_ACCESS = () -> true;
+
+        if (FabricLoader.getInstance().isModLoaded("extended_drawers_extensions")) {
+            EDExtensionsPolymerPatch.onInitialize();
+        }
     }
 }
