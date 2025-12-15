@@ -22,16 +22,14 @@ import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
 import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EDExtensionsPolymerPatch  {
     public static void onInitialize() {
         PolymerResourcePackUtils.addModAssets("extended_drawers_extensions");
-        ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.of("extended_drawers_extensions", "block"));
+        ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.fromNamespaceAndPath("extended_drawers_extensions", "block"));
 
         BlockStateModelManager.addBlock(ExtendedDrawersExtensions.id("drawer_barrel"), ExtensionBlocks.DRAWER_BARREL);
         BlockStateModelManager.addBlock(ExtendedDrawersExtensions.id("ender_connector"), ExtensionBlocks.ENDER_CONNECTOR);

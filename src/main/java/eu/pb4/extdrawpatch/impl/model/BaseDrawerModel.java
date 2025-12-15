@@ -11,18 +11,18 @@ import io.github.mattidragon.extendeddrawers.config.category.ClientCategory;
 import io.github.mattidragon.extendeddrawers.storage.DrawerStorage;
 import io.github.mattidragon.extendeddrawers.storage.ModifierAccess;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.enums.BlockFace;
-import net.minecraft.item.ItemDisplayContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec2f;
+import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -35,9 +35,9 @@ import java.util.Map;
 public class BaseDrawerModel extends BlockModel {
     private final ItemDisplayElement main;
     private final EnumProperty<Direction> property;
-    private final EnumProperty<BlockFace> blockFace;
+    private final EnumProperty<AttachFace> blockFace;
 
-    public BaseDrawerModel(BlockState state, EnumProperty<Direction> directionProperty, EnumProperty<BlockFace> blockFaceProperty) {
+    public BaseDrawerModel(BlockState state, EnumProperty<Direction> directionProperty, EnumProperty<AttachFace> blockFaceProperty) {
         this.property = directionProperty;
         this.blockFace = blockFaceProperty;
         this.main = ItemDisplayElementUtil.createSimple(state.getBlock().asItem());
@@ -54,8 +54,8 @@ public class BaseDrawerModel extends BlockModel {
     }
 
     protected void updateState(BlockState state) {
-        var yaw = state.get(this.property).getPositiveHorizontalDegrees();
-        var pitch = switch (state.get(this.blockFace)) {
+        var yaw = state.getValue(this.property).toYRot();
+        var pitch = switch (state.getValue(this.blockFace)) {
             case FLOOR -> -90;
             case CEILING -> 90;
             case WALL -> 0;
@@ -73,12 +73,12 @@ public class BaseDrawerModel extends BlockModel {
     }
 
 
-    public record DrawerIcon(boolean isSmall, Vec2f offset, Vector2f rot, ItemDisplayElement mainItem, List<ItemDisplayElement> topIcons, TextDisplayElement count) {
+    public record DrawerIcon(boolean isSmall, Vec2 offset, Vector2f rot, ItemDisplayElement mainItem, List<ItemDisplayElement> topIcons, TextDisplayElement count) {
         private static final Map<Identifier, ItemStack> ICONS = new HashMap<>();
         
-        public static DrawerIcon create(BaseDrawerModel model, boolean isSmall, Vec2f offset, Matrix4f mat) {
+        public static DrawerIcon create(BaseDrawerModel model, boolean isSmall, Vec2 offset, Matrix4f mat) {
             var icon = new DrawerIcon(isSmall, offset, new Vector2f(), ItemDisplayElementUtil.createSimple(), new ArrayList<>(),
-                    new TextDisplayElement(Text.literal("0")));
+                    new TextDisplayElement(Component.literal("0")));
             var conf = ExtendedDrawers.CONFIG.get().client().layout();
 
             icon.mainItem.setViewRange(0.4f);
@@ -94,7 +94,7 @@ public class BaseDrawerModel extends BlockModel {
             icon.count.setTransformation(mat);
             mat.identity();
             mat.translate(offset.x, offset.y, 0.505f);
-            mat.rotateY(MathHelper.PI);
+            mat.rotateY(Mth.PI);
             mat.scale(conf.itemScale(isSmall));
             mat.scale(0.5f, 0.5f, 0.008f);
             icon.mainItem.setTransformation(mat);
@@ -137,7 +137,7 @@ public class BaseDrawerModel extends BlockModel {
                 var size = this.topIcons.size();
                 mat.identity();
                 mat.translate(offset.x, offset.y, 0.505f);
-                mat.rotateY(MathHelper.PI);
+                mat.rotateY(Mth.PI);
                 mat.scale(conf.textScale(isSmall));
                 mat.translate(0, 0.40f, 0);
                 mat.scale(0.2f, 0.2f, 0.01f);
@@ -202,7 +202,7 @@ public class BaseDrawerModel extends BlockModel {
 
         public void update(BaseDrawerModel model, ItemStack itemStack, String count, List<ItemStack> icons, Matrix4f mat) {
             this.mainItem.setItem(itemStack);
-            this.count.setText(Text.literal(count));
+            this.count.setText(Component.literal(count));
             this.updateSettingsPos(model, icons, mat);
         }
 
@@ -217,11 +217,11 @@ public class BaseDrawerModel extends BlockModel {
                     itemId = itemId.withPath(x -> x.substring("block/".length()));
                 }
 
-                var item = Registries.ITEM.get(itemId);
+                var item = BuiltInRegistries.ITEM.getValue(itemId);
                 if (item == Items.AIR) {
                     item = Items.BARRIER;
                 }
-                val = item.getDefaultStack();
+                val = item.getDefaultInstance();
                 ICONS.put(id, val);
             }
 

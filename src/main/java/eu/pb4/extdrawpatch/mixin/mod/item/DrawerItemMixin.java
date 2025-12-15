@@ -2,34 +2,38 @@ package eu.pb4.extdrawpatch.mixin.mod.item;
 
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import io.github.mattidragon.extendeddrawers.item.DrawerItem;
-import net.minecraft.block.Block;
-import net.minecraft.item.*;
-import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
-import net.minecraft.registry.Registries;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import xyz.nucleoid.packettweaker.PacketContext;
 
 @Mixin(DrawerItem.class)
 public class DrawerItemMixin extends BlockItem implements PolymerItem {
-    public DrawerItemMixin(Block block, Settings settings) {
+    public DrawerItemMixin(Block block, Properties settings) {
         super(block, settings);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        var x = super.useOnBlock(context);
-        if (x == ActionResult.SUCCESS) {
-            if (context.getPlayer() instanceof ServerPlayerEntity player) {
-                var pos = Vec3d.ofCenter(context.getBlockPos().offset(context.getSide()));
-                var blockSoundGroup = this.getBlock().getDefaultState().getSoundGroup();
-                player.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(this.getPlaceSound(this.getBlock().getDefaultState())), SoundCategory.BLOCKS, pos.x, pos.y, pos.z, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F, context.getPlayer().getRandom().nextLong()));
+    public InteractionResult useOn(UseOnContext context) {
+        var x = super.useOn(context);
+        if (x == InteractionResult.SUCCESS) {
+            if (context.getPlayer() instanceof ServerPlayer player) {
+                var pos = Vec3.atCenterOf(context.getClickedPos().relative(context.getClickedFace()));
+                var blockSoundGroup = this.getBlock().defaultBlockState().getSoundType();
+                player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(this.getPlaceSound(this.getBlock().defaultBlockState())), SoundSource.BLOCKS, pos.x, pos.y, pos.z, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F, context.getPlayer().getRandom().nextLong()));
             }
-            return ActionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS_SERVER;
         }
         return x;
     }

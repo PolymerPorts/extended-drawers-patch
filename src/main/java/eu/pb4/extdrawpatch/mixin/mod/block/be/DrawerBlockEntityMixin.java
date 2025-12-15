@@ -5,12 +5,12 @@ import eu.pb4.factorytools.api.block.BlockEntityExtraListener;
 import eu.pb4.polymer.virtualentity.api.attachment.BlockAwareAttachment;
 import io.github.mattidragon.extendeddrawers.block.entity.DrawerBlockEntity;
 import io.github.mattidragon.extendeddrawers.storage.DrawerSlot;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,16 +37,16 @@ public class DrawerBlockEntityMixin extends BlockEntity implements BlockEntityEx
     }
 
     @Override
-    public void onListenerUpdate(WorldChunk chunk) {
-        var x = BlockAwareAttachment.get(chunk, this.pos);
+    public void onListenerUpdate(LevelChunk chunk) {
+        var x = BlockAwareAttachment.get(chunk, this.worldPosition);
         if (x != null && x.holder() instanceof DrawerModel model) {
             this.model = model;
             model.update(this.storages);
         }
     }
 
-    @Inject(method = "readComponents", at = @At("TAIL"))
-    private void onReadComponents(ComponentsAccess components, CallbackInfo ci) {
+    @Inject(method = "applyImplicitComponents", at = @At("TAIL"))
+    private void onReadComponents(DataComponentGetter components, CallbackInfo ci) {
         if (this.model != null) {
             this.model.update(this.storages);
         }

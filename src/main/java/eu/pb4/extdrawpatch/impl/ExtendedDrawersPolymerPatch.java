@@ -13,9 +13,9 @@ import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
 import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.registry.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +26,13 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
     public void onInitialize() {
         PolymerResourcePackUtils.addModAssets("extended_drawers");
         PolymerResourcePackUtils.addModAssets(MOD_ID);
-        ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.of("extdraw-patch", "sgui"));
+        ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.fromNamespaceAndPath("extdraw-patch", "sgui"));
 
         CapacityLimiterGui.register();
 
         PolymerComponent.registerDataComponent(ModDataComponents.COMPACTING_DRAWER_CONTENTS, ModDataComponents.DRAWER_CONTENTS, ModDataComponents.LIMITER_LIMIT);
         PolymerBlockUtils.registerBlockEntity(ModBlocks.COMPACTING_DRAWER_BLOCK_ENTITY, ModBlocks.DRAWER_BLOCK_ENTITY, ModBlocks.SHADOW_DRAWER_BLOCK_ENTITY);
-        RegistrySyncUtils.setServerEntry(Registries.RECIPE_SERIALIZER, ModRecipes.COPY_LIMITER_SERIALIZER);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.RECIPE_SERIALIZER, ModRecipes.COPY_LIMITER_SERIALIZER);
 
         ExtendedDrawers.SHIFT_ACCESS = () -> true;
 

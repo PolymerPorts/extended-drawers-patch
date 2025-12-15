@@ -3,10 +3,9 @@ package eu.pb4.extdrawpatch.impl.model;
 import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
 import io.github.mattidragon.extendeddrawers.block.ShadowDrawerBlock;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec2f;
-
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
 import java.util.List;
 
 public class ShadowDrawerModel extends BaseDrawerModel {
@@ -14,7 +13,7 @@ public class ShadowDrawerModel extends BaseDrawerModel {
 
     public ShadowDrawerModel(BlockState state) {
         super(state, ShadowDrawerBlock.FACING, ShadowDrawerBlock.FACE);
-        this.icon = DrawerIcon.create(this, false, Vec2f.ZERO, mat());
+        this.icon = DrawerIcon.create(this, false, Vec2.ZERO, mat());
         updateState(state);
     }
 
