@@ -2,10 +2,10 @@ package eu.pb4.extdrawpatch.impl;
 
 import eu.pb4.factorytools.api.block.FactoryBlock;
 import eu.pb4.polymer.virtualentity.api.ElementHolder;
+import net.fabricmc.fabric.api.networking.v1.context.PacketContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import xyz.nucleoid.packettweaker.PacketContext;
 
 public interface BaseFactoryBlock extends FactoryBlock {
 

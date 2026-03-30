@@ -25,10 +25,10 @@ public class ShadowDrawerModel extends BaseDrawerModel {
 
     public void update(ItemVariant item, long count, boolean hidden) {
         if (hidden || count == -1 || item.isBlank()) {
-            this.icon.update(this, ItemStack.EMPTY, "", List.of(), mat());
+            this.icon.update(this, ItemStack.EMPTY, "", false, List.of(), mat());
         } else {
             this.icon.update(this, item.toStack(), count == -2 ? "∞"
-                    : ((count != 0 || ExtendedDrawers.CONFIG.get().client().displayEmptyCount()) ? String.valueOf(count) : ""), List.of(), mat());
+                    : ((count != 0 || ExtendedDrawers.CONFIG.get().client().displayEmptyCount()) ? String.valueOf(count) : ""), false, List.of(), mat());
         }
         this.tick();
     }

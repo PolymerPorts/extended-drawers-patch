@@ -37,23 +37,23 @@ public class CompactingDrawerModel extends BaseDrawerModel {
 
         if (arr.length >= 1) {
             var x = ModBlocks.COMPACTING_DRAWER.getSlot(drawer, ModBlocks.COMPACTING_DRAWER.getSlotIndex(drawer, new Vec2(0.5f, 0.25f)));
-            this.top.updateStorage(this, x.getResource(), x.getAmount(), storage, mat);
+            this.top.updateStorage(this, x.getResource(), x.getAmount(), x.getAmount() == x.getCapacity(), storage, mat);
         } else {
-            this.top.updateStorage(this, ItemVariant.blank(), 0, storage, mat);
+            this.top.updateStorage(this, ItemVariant.blank(), 0, false, storage, mat);
         }
 
         if (arr.length >= 2) {
             var x = ModBlocks.COMPACTING_DRAWER.getSlot(drawer, ModBlocks.COMPACTING_DRAWER.getSlotIndex(drawer, new Vec2(0.75f, 0.75f)));
-            this.right.updateStorage(this, x.getResource(), x.getAmount(), storage, mat);
+            this.right.updateStorage(this, x.getResource(), x.getAmount(), x.getAmount() == x.getCapacity(), storage, mat);
         } else {
-            this.right.updateStorage(this, ItemVariant.blank(), 0, storage, mat);
+            this.right.updateStorage(this, ItemVariant.blank(), 0, false, storage, mat);
         }
 
         if (arr.length >= 3) {
             var x = ModBlocks.COMPACTING_DRAWER.getSlot(drawer, ModBlocks.COMPACTING_DRAWER.getSlotIndex(drawer, new Vec2(0.25f, 0.75f)));
-            this.left.updateStorage(this, x.getResource(), x.getAmount(), storage, mat);
+            this.left.updateStorage(this, x.getResource(), x.getAmount(), x.getAmount() == x.getCapacity(), storage, mat);
         } else {
-            this.left.updateStorage(this, ItemVariant.blank(), 0, storage, mat);
+            this.left.updateStorage(this, ItemVariant.blank(), 0, false, storage, mat);
         }
         this.tick();
     }

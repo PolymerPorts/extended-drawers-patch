@@ -40,7 +40,7 @@ public class DrawerModel extends BaseDrawerModel {
         for (var i = 0; i < this.icons.length; i++) {
             var storage = storages[i];
             var icon = icons[i];
-            icon.updateStorage(this, storage.getResource(), storage.getAmount(), storage, mat);
+            icon.updateStorage(this, storage.getResource(), storage.getAmount(), storage.getAmount() == storage.getCapacity(), storage, mat);
         }
         this.tick();
     }

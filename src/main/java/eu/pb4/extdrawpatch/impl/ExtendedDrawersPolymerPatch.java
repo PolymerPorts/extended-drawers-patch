@@ -8,6 +8,7 @@ import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import eu.pb4.polymer.resourcepack.extras.api.ResourcePackExtras;
 import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
 import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
+import io.github.mattidragon.extendeddrawers.recipe.CopyLimiterRecipe;
 import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
 import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
 import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
@@ -32,7 +33,7 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
 
         PolymerComponent.registerDataComponent(ModDataComponents.COMPACTING_DRAWER_CONTENTS, ModDataComponents.DRAWER_CONTENTS, ModDataComponents.LIMITER_LIMIT);
         PolymerBlockUtils.registerBlockEntity(ModBlocks.COMPACTING_DRAWER_BLOCK_ENTITY, ModBlocks.DRAWER_BLOCK_ENTITY, ModBlocks.SHADOW_DRAWER_BLOCK_ENTITY);
-        RegistrySyncUtils.setServerEntry(BuiltInRegistries.RECIPE_SERIALIZER, ModRecipes.COPY_LIMITER_SERIALIZER);
+        RegistrySyncUtils.setServerEntry(BuiltInRegistries.RECIPE_SERIALIZER, CopyLimiterRecipe.SERIALIZER);
 
         ExtendedDrawers.SHIFT_ACCESS = () -> true;
 

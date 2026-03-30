@@ -89,7 +89,7 @@ public class BaseDrawerModel extends BlockModel {
             mat.identity();
             mat.translate(offset.x, offset.y, 0.51f);
             mat.scale(conf.textScale(isSmall));
-            mat.translate(0, -conf.textOffset() / 2, 0);
+            mat.translate(0, -conf.textOffset(isSmall) / 2, 0);
             mat.scale(0.5f);
             icon.count.setTransformation(mat);
             mat.identity();
@@ -162,9 +162,9 @@ public class BaseDrawerModel extends BlockModel {
             }
         }
 
-        public void updateStorage(BaseDrawerModel model, ItemVariant resource, long amount, DrawerStorage storage, Matrix4f mat) {
+        public void updateStorage(BaseDrawerModel model, ItemVariant resource, long amount, boolean isFull, DrawerStorage storage, Matrix4f mat) {
             if (storage.isHidden()) {
-                update(model, resource.toStack(), "", List.of(), mat);
+                update(model, resource.toStack(), "", false, List.of(), mat);
                 return;
             }
 
@@ -196,13 +196,17 @@ public class BaseDrawerModel extends BlockModel {
                 addIcon(icons, ExtendedDrawers.id("item/limiter"));
             }
 
+
+
             update(model, resource.toStack(), storage.isDuping() ? "∞"
-                    : ((amount != 0 || ExtendedDrawers.CONFIG.get().client().displayEmptyCount()) ? String.valueOf(amount) : ""), icons, mat);
+                    : ((amount != 0 || ExtendedDrawers.CONFIG.get().client().displayEmptyCount()) ? String.valueOf(amount) : ""),
+                    ExtendedDrawers.CONFIG.get().client().indicateFullDrawers() && isFull,
+                    icons, mat);
         }
 
-        public void update(BaseDrawerModel model, ItemStack itemStack, String count, List<ItemStack> icons, Matrix4f mat) {
+        public void update(BaseDrawerModel model, ItemStack itemStack, String count, boolean full, List<ItemStack> icons, Matrix4f mat) {
             this.mainItem.setItem(itemStack);
-            this.count.setText(Component.literal(count));
+            this.count.setText(Component.literal(count).withColor(full ? 0xffffff00 : 0xffffffff));
             this.updateSettingsPos(model, icons, mat);
         }
 

@@ -1,5 +1,6 @@
 package eu.pb4.extdrawpatch.impl.ui;
 
+import eu.pb4.factorytools.api.util.LazyItemStack;
 import eu.pb4.factorytools.api.virtualentity.ItemDisplayElementUtil;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.AnvilInputGui;
@@ -27,10 +28,10 @@ public class CapacityLimiterGui extends AnvilInputGui {
     private final InteractionHand hand;
     private final ItemStack stack;
     private static final Component TEXTURE = Component.literal("-0.").setStyle(Style.EMPTY.withColor(0xFFFFFF).withFont(new FontDescription.Resource(Identifier.parse("extdraw-patch:gui"))));
-    private static final ItemStack EMPTY = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/empty"));
-    private static final ItemStack CLOSE = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/close"));
-    private static final ItemStack DONE = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/done"));
-    private static final ItemStack DONE_BLOCKED = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/done_blocked"));
+    private static final LazyItemStack EMPTY = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/empty"));
+    private static final LazyItemStack CLOSE = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/close"));
+    private static final LazyItemStack DONE = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/done"));
+    private static final LazyItemStack DONE_BLOCKED = ItemDisplayElementUtil.getModel(Identifier.parse("extdraw-patch:sgui/done_blocked"));
 
     private long value = Long.MAX_VALUE;
 
@@ -44,7 +45,7 @@ public class CapacityLimiterGui extends AnvilInputGui {
         this.setDefaultInputValue(val);
         this.updateDoneButton(value != Long.MAX_VALUE);
         this.updateDefault(val);
-        var close = GuiElementBuilder.from(CLOSE);
+        var close = GuiElementBuilder.from(CLOSE.get());
         close.setName(CommonComponents.GUI_BACK);
         close.setCallback(x -> {
             player.connection.send(new ClientboundSoundEntityPacket(
@@ -60,24 +61,24 @@ public class CapacityLimiterGui extends AnvilInputGui {
     }
 
     private void updateDefault(String current) {
-        ItemStack itemStack = EMPTY.copy();
+        ItemStack itemStack = EMPTY.get().copy();
         itemStack.set(DataComponents.CUSTOM_NAME, Component.literal(current));
         itemStack.set(DataComponents.ITEM_NAME, Component.literal(""));
         itemStack.set(DataComponents.TOOLTIP_DISPLAY, new TooltipDisplay(true, ReferenceSortedSets.emptySet()));
         this.setSlot(0, itemStack, (a, b, c, d) -> {
-            this.screenHandler.setRemoteSlot(2, ItemStack.EMPTY);
+            this.wrappedMenu.setRemoteSlot(2, ItemStack.EMPTY);
         });
     }
 
     private void updateDoneButton(boolean success) {
         if (!success) {
-            var b = GuiElementBuilder.from(DONE_BLOCKED);
+            var b = GuiElementBuilder.from(DONE_BLOCKED.get());
             b.setName(Component.empty().append(CommonComponents.GUI_DONE).withStyle(ChatFormatting.GRAY));
             this.setSlot(1, b);
             return;
         }
 
-        var b = GuiElementBuilder.from(DONE);
+        var b = GuiElementBuilder.from(DONE.get());
         b.setName(CommonComponents.GUI_DONE);
         b.setCallback(x -> {
             player.connection.send(new ClientboundSoundEntityPacket(
@@ -100,7 +101,7 @@ public class CapacityLimiterGui extends AnvilInputGui {
         } catch (Throwable ignored) {
             this.updateDoneButton(false);
         }
-        this.screenHandler.setRemoteSlot(2, ItemStack.EMPTY);
+        this.wrappedMenu.setRemoteSlot(2, ItemStack.EMPTY);
     }
 
     @Override
