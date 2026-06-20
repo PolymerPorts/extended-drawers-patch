@@ -1,32 +1,21 @@
 package eu.pb4.extdrawpatch.impl.extensions;
 
-import eu.pb4.extdrawpatch.impl.BaseFactoryBlock;
 import eu.pb4.extdrawpatch.impl.BlockItemPolymerOverlay;
 import eu.pb4.extdrawpatch.impl.OverlayFactoryBlock;
-import eu.pb4.extdrawpatch.impl.ui.CapacityLimiterGui;
 import eu.pb4.factorytools.api.block.model.generic.BlockStateModelManager;
 import eu.pb4.polymer.core.api.block.PolymerBlockUtils;
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import eu.pb4.polymer.core.api.other.PolymerComponent;
 import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import eu.pb4.polymer.resourcepack.extras.api.ResourcePackExtras;
-import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
 import eu.pb4.polymer.virtualentity.api.BlockWithElementHolder;
-import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
 import io.github.mattidragon.extendeddrawers.extensions.ExtendedDrawersExtensions;
-import io.github.mattidragon.extendeddrawers.extensions.registry.ExtensionBlocks;
-import io.github.mattidragon.extendeddrawers.extensions.registry.ExtensionDataComponents;
-import io.github.mattidragon.extendeddrawers.extensions.registry.ExtensionItems;
-import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
-import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
-import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
+import io.github.mattidragon.extendeddrawers.extensions.block.ExtensionBlocks;
+import io.github.mattidragon.extendeddrawers.extensions.component.ExtensionDataComponents;
+import io.github.mattidragon.extendeddrawers.extensions.item.ExtensionItems;
 import net.minecraft.resources.Identifier;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class EDExtensionsPolymerPatch  {
+public class EDExtensionsPolymerPatch {
     public static void onInitialize() {
         PolymerResourcePackUtils.addModAssets("extended_drawers_extensions");
         ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.fromNamespaceAndPath("extended_drawers_extensions", "block"));

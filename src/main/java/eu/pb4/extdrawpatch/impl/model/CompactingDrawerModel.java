@@ -1,8 +1,8 @@
 package eu.pb4.extdrawpatch.impl.model;
 
 import io.github.mattidragon.extendeddrawers.block.CompactingDrawerBlock;
+import io.github.mattidragon.extendeddrawers.block.ModBlocks;
 import io.github.mattidragon.extendeddrawers.block.entity.CompactingDrawerBlockEntity;
-import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
 import io.github.mattidragon.extendeddrawers.storage.CompactingDrawerStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.world.level.block.state.BlockState;

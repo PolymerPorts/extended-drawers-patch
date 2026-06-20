@@ -8,10 +8,9 @@ import eu.pb4.polymer.resourcepack.api.PolymerResourcePackUtils;
 import eu.pb4.polymer.resourcepack.extras.api.ResourcePackExtras;
 import eu.pb4.polymer.rsm.api.RegistrySyncUtils;
 import io.github.mattidragon.extendeddrawers.ExtendedDrawers;
+import io.github.mattidragon.extendeddrawers.block.ModBlocks;
+import io.github.mattidragon.extendeddrawers.component.ModDataComponents;
 import io.github.mattidragon.extendeddrawers.recipe.CopyLimiterRecipe;
-import io.github.mattidragon.extendeddrawers.registry.ModBlocks;
-import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
-import io.github.mattidragon.extendeddrawers.registry.ModRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,12 +18,14 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class ExtendedDrawersPolymerPatch implements ModInitializer {
     public static final String MOD_ID = "extended-drawers-polymer-patch";
     public static final Logger LOGGER = LoggerFactory.getLogger("extended-drawers-polymer-patch");
     @Override
     public void onInitialize() {
+        MixinEnvironment.getCurrentEnvironment().audit();
         PolymerResourcePackUtils.addModAssets("extended_drawers");
         PolymerResourcePackUtils.addModAssets(MOD_ID);
         ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.fromNamespaceAndPath("extdraw-patch", "sgui"));

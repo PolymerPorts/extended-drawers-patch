@@ -1,7 +1,7 @@
 package eu.pb4.extdrawpatch.mixin.mod.block;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import io.github.mattidragon.extendeddrawers.extensions.registry.ExtensionBlocks;
+import io.github.mattidragon.extendeddrawers.extensions.block.ExtensionBlocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;

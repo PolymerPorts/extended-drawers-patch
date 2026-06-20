@@ -3,7 +3,7 @@ package eu.pb4.extdrawpatch.mixin.mod.item;
 import eu.pb4.factorytools.api.item.FactoryBlockItem;
 import eu.pb4.polymer.core.api.block.PolymerBlock;
 import eu.pb4.polymer.core.api.item.SimplePolymerItem;
-import io.github.mattidragon.extendeddrawers.registry.ModItems;
+import io.github.mattidragon.extendeddrawers.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

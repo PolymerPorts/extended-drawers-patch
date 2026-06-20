@@ -5,7 +5,7 @@ import eu.pb4.factorytools.api.virtualentity.ItemDisplayElementUtil;
 import eu.pb4.sgui.api.elements.GuiElementBuilder;
 import eu.pb4.sgui.api.gui.AnvilInputGui;
 import io.github.mattidragon.extendeddrawers.component.LimiterLimitComponent;
-import io.github.mattidragon.extendeddrawers.registry.ModDataComponents;
+import io.github.mattidragon.extendeddrawers.component.ModDataComponents;
 import it.unimi.dsi.fastutil.objects.ReferenceSortedSets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
