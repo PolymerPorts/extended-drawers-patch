@@ -25,7 +25,7 @@ public class ExtendedDrawersPolymerPatch implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("extended-drawers-polymer-patch");
     @Override
     public void onInitialize() {
-        MixinEnvironment.getCurrentEnvironment().audit();
+        //MixinEnvironment.getCurrentEnvironment().audit();
         PolymerResourcePackUtils.addModAssets("extended_drawers");
         PolymerResourcePackUtils.addModAssets(MOD_ID);
         ResourcePackExtras.forDefault().addBridgedModelsFolder(Identifier.fromNamespaceAndPath("extdraw-patch", "sgui"));
